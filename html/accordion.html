@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>ss</title>
+<style>
+* { margin:0; padding:0; }
+body{
+	background: url("apple/back.jpg")  no-repeat;
+}
+ul { overflow:hidden; position:relative; width:680px; height:300px; margin:50px auto; }
+li { position:absolute; top:0; left:0; padding-left:20px; list-style:none; height:300px; }
+#btn{
+	width: 100px;
+	height:100px;
+	background: url("img2/bank.png") no-repeat;
+	background-size: contain;
+	cursor:pointer;
+}
+
+span { position:absolute; top:0; left:0; width:20px; height:100%; font-size:16px; font-weight:bold; line-height:90px; text-align:center;}
+</style>
+<script src="move.js"></script>
+<script>
+window.onload=function (){
+	var aLi=document.getElementsByTagName('li');
+	var aSpan=document.getElementsByTagName('span');
+	var nLiW=aLi[0].offsetWidth;
+	var sW=aSpan[0].offsetWidth;
+	var oBtn=document.getElementById('btn');
+	oBtn.onclick=function(){
+		window.history.go(-1);
+	};
+	// 初始化位置
+	for (var i=0; i<aLi.length; i++)
+	{
+		if (i == 0)
+		{
+			continue;
+		}
+		
+		aLi[i].style.left=nLiW+(i-1)*sW+'px';
+	}
+	
+	// 加事件
+	for (var i=0; i<aSpan.length; i++)
+	{
+		(function (index){
+			aSpan[i].onmouseover=function (){
+				for (var i=0; i<aSpan.length; i++)
+				{
+					if (i <= index)
+					{
+						// aLi[i].style.left=i*sW+'px';
+						var left=i*sW;
+					}
+					else
+					{
+						// aLi[i].style.left=nLiW+(i-1)*sW+'px';
+						var left=nLiW+(i-1)*sW;
+					}
+					
+					move(aLi[i], {left:left}, {
+						easing:Tween.Quad.easeInOut
+					});
+				}
+			};
+		})(i);
+	}
+};
+</script>
+</head>
+
+<body>
+<div id="btn">
+</div>
+	<ul>
+		<li>
+			<span style="background:#333;">o n e</span>
+			<img src="01/one.jpg" />
+		</li>
+		<li>
+			<span style="background:#9ecc99;">t w o</span>
+			<img src="01/two.jpg" />
+		</li>
+		<li>
+			<span style="background:#8487cc;">t r <h></h></span>
+			<img src="01/three.jpg" />
+		</li>
+		<li>
+			<span style="background:#c2c5cc;">f o u</span>
+			<img src="01/r	.jpg" />
+		</li>
+	</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
